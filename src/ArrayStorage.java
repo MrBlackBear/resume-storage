@@ -2,16 +2,17 @@
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
+    Resume[] storage = new Resume[ARRAY_SIZE];
     int size = 0;
+    private static int ARRAY_SIZE = 10000;
 
     void clear() {
-        storage = new Resume[10000];
+        storage = new Resume[ARRAY_SIZE];
         size = 0;
     }
 
     void save(Resume r) {
-        if (size == 9999) {
+        if (size == ARRAY_SIZE - 1) {
             System.out.println("Массив заполнен! Больше элементов вставить нельзя!");
             return;
         }
@@ -58,6 +59,6 @@ public class ArrayStorage {
     }
 
     int size() {
-        return this.size;
+        return size;
     }
 }
