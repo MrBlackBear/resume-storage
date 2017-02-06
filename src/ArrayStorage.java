@@ -11,39 +11,45 @@ public class ArrayStorage {
         size = 0;
     }
 
+    public void update(Resume r){
+        if(!findResume(r)){
+            System.out.println("ERROR!");
+        }
+        storage[findResumePosition(r.uuid)] = r;
+    }
+
     void save(Resume r) {
         if (size == ARRAY_SIZE - 1) {
             System.out.println("Массив заполнен! Больше элементов вставить нельзя!");
             return;
         }
-        for (int i = 0; i < this.size; i++) {
-            if (storage[i].toString().equals(r)) {
-                System.out.println("Такой элемент уже есть в массиве! Повторяющиеся элементы вставлять нельзя!");
+        if (!findResume(r)) {
+                System.out.println("ERROR!");
                 return;
-            }
         }
         storage[size] = r;
         size++;
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i < size(); i++) {
-            if (storage[i].toString().equals(uuid)) {
-                return storage[i];
-            }
+        if (findResumeById(uuid)) {
+            int i = findResumePosition(uuid);
+            return storage[i];
+        }else{
+            System.out.println("ERROR!");
         }
         return null;
-
     }
 
     void delete(String uuid) {
-        for (int i = 0; i < size(); i++) {
-            if (storage[i].toString().equals(uuid)) {
-                for (int j = i; j < this.size() - i - 1; j++) {
-                    storage[i] = storage[i + 1];
-                }
-                size--;
+        if (findResumeById(uuid)) {
+            int i = findResumePosition(uuid);
+            for (int j = i; j < this.size() - i - 1; j++) {
+                storage[i] = storage[i + 1];
             }
+            size--;
+        } else {
+            System.out.println("ERROR!");
         }
     }
 
@@ -60,5 +66,32 @@ public class ArrayStorage {
 
     int size() {
         return size;
+    }
+
+    private boolean findResume(Resume resume){
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(resume.uuid)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean findResumeById(String uuid){
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int findResumePosition(String uuid){
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)){
+                return i;
+            }
+        }
+        return -1;
     }
 }
