@@ -11,8 +11,8 @@ public class ArrayStorage {
         size = 0;
     }
 
-    public void update(Resume r){
-        if(!findResume(r)){
+    public void update(Resume r) {
+        if (!findResume(r)) {
             System.out.println("ERROR!");
         }
         storage[findResumePosition(r.uuid)] = r;
@@ -24,8 +24,8 @@ public class ArrayStorage {
             return;
         }
         if (findResume(r)) {
-                System.out.println("ERROR!");
-                return;
+            System.out.println("ERROR!");
+            return;
         }
         storage[size] = r;
         size++;
@@ -35,7 +35,7 @@ public class ArrayStorage {
         if (findResumeById(uuid)) {
             int i = findResumePosition(uuid);
             return storage[i];
-        }else{
+        } else {
             System.out.println("ERROR!");
         }
         return null;
@@ -68,27 +68,27 @@ public class ArrayStorage {
         return size;
     }
 
-    private boolean findResume(Resume resume){
+    private boolean findResume(Resume resume) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(resume.uuid)){
+            if (storage[i].uuid.equals(resume.uuid)) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean findResumeById(String uuid){
+    private boolean findResumeById(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)){
+            if (storage[i].uuid.equals(uuid)) {
                 return true;
             }
         }
         return false;
     }
 
-    private int findResumePosition(String uuid){
+    private int findResumePosition(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)){
+            if (storage[i].uuid.equals(uuid)) {
                 return i;
             }
         }
