@@ -23,7 +23,7 @@ public class ArrayStorage {
             System.out.println("Массив заполнен! Больше элементов вставить нельзя!");
             return;
         }
-        if (!findResume(r)) {
+        if (findResume(r)) {
                 System.out.println("ERROR!");
                 return;
         }
