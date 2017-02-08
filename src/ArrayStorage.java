@@ -3,7 +3,7 @@
  */
 public class ArrayStorage extends AbstractArrayStorage {
     public void save(Resume r) {
-        if (size == ARRAY_SIZE - 1) {
+        if (size >= ARRAY_SIZE) {
             System.out.println("Массив заполнен! Больше элементов вставить нельзя!");
             return;
         }
