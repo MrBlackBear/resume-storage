@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /**
  * Array based storage for Resumes
  */
@@ -9,7 +7,7 @@ public class ArrayStorage extends AbstractArrayStorage {
             System.out.println("Массив заполнен! Больше элементов вставить нельзя!");
             return;
         }
-        if (findResume(r)) {
+        if (getIndex(r.getUuid()) >= 0) {
             System.out.println("ERROR!");
             return;
         }
@@ -17,27 +15,9 @@ public class ArrayStorage extends AbstractArrayStorage {
         size++;
     }
 
-    protected boolean findResume(Resume resume) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(resume.uuid)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    protected boolean findResumeById(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     protected int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
+            if (storage[i].getUuid().equals(uuid)) {
                 return i;
             }
         }
