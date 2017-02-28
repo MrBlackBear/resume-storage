@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.UUID;
+
 import static org.junit.Assert.*;
 
 public abstract class AbstractArrayStorageTest {
@@ -87,5 +88,4 @@ public abstract class AbstractArrayStorageTest {
     public void saveExist() throws Exception {
         storage.save(RESUME_1);
     }
-
 }
