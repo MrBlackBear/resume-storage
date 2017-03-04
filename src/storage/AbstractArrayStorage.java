@@ -7,11 +7,50 @@ import model.Resume;
 
 import java.util.Arrays;
 
-public abstract class AbstractArrayStorage implements Storage {
+public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int STORAGE_LIMIT = 10000;
 
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
+
+
+    protected Object getSearchKey(String uuid){
+        int index = getIndex(uuid);
+        if (index < 0){
+            return new NotExistStorageException(uuid);
+        }
+        return storage[index];
+    };
+
+    protected  void doUpdate(Resume r, Object searchKey){
+        storage[(Integer)searchKey] = r;
+    };
+
+
+    protected  boolean isExist(Object searchKey){
+        return (Integer) searchKey >= 0;
+
+    };
+
+    protected  void doSave(Resume r, Object searchKey){
+        if (size == STORAGE_LIMIT) {
+            throw new StorageException("Storage overflow", r.getUuid());
+        } else {
+            insertElement(r, (Integer) searchKey);
+            size++;
+        }
+    };
+
+    protected  Resume doGet(Object searchKey){
+        return storage[(Integer) searchKey];
+    };
+
+    protected  void doDelete(Object searchKey){
+        fillDeletedElement((Integer) searchKey);
+        storage[size - 1] = null;
+        size--;
+    };
+
 
     public int size() {
         return size;
