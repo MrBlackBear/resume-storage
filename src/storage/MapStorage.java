@@ -5,8 +5,8 @@ import model.Resume;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapStorage extends AbstractStorage{
-    private Map<Integer,Resume> map = new HashMap<>();
+public class MapStorage extends AbstractStorage {
+    private Map<Integer, Resume> map = new HashMap<>();
 
     @Override
     protected Object getSearchKey(String uuid) {
@@ -15,7 +15,7 @@ public class MapStorage extends AbstractStorage{
 
     @Override
     protected void doUpdate(Resume r, Object searchKey) {
-        map.put((Integer)searchKey,r);
+        map.put((Integer) searchKey, r);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class MapStorage extends AbstractStorage{
 
     @Override
     protected void doSave(Resume r, Object searchKey) {
-        map.put((Integer)searchKey,r);
+        map.put((Integer) searchKey, r);
     }
 
     @Override

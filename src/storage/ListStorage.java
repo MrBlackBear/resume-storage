@@ -21,7 +21,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void doUpdate(Resume r, Object searchKey) {
-        list.add((Integer) searchKey,r);
+        list.add((Integer) searchKey, r);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void doSave(Resume r, Object searchKey) {
-        if (list.contains(r)){
+        if (list.contains(r)) {
             throw new ExistStorageException(r.getUuid());
         }
         list.add(r);
@@ -39,14 +39,13 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected Resume doGet(Object searchKey) {
-        return list.get((Integer)searchKey);
+        return list.get((Integer) searchKey);
     }
 
     @Override
     protected void doDelete(Object searchKey) {
         list.remove(searchKey);
     }
-
 
     @Override
     public void clear() {
