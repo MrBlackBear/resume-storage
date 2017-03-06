@@ -4,6 +4,8 @@ import exception.ExistStorageException;
 import model.Resume;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage {
@@ -21,19 +23,16 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void doUpdate(Resume r, Object searchKey) {
-        list.add((Integer) searchKey, r);
+        list.set((Integer) searchKey, r);
     }
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return list.contains(searchKey);
+        return searchKey != null;
     }
 
     @Override
     protected void doSave(Resume r, Object searchKey) {
-        if (list.contains(r)) {
-            throw new ExistStorageException(r.getUuid());
-        }
         list.add(r);
     }
 
@@ -44,7 +43,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void doDelete(Object searchKey) {
-        list.remove(searchKey);
+        list.remove(((Integer) searchKey).intValue());
     }
 
     @Override
@@ -53,8 +52,9 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return (Resume[]) list.toArray();
+    public List<Resume> getAllSorted() {
+        Collections.sort(list, (o1, o2) -> o1.getFullName().compareTo(o2.getFullName()));
+        return list;
     }
 
     @Override
