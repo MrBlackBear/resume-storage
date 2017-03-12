@@ -4,7 +4,7 @@ import model.Resume;
 
 import java.util.*;
 
-public class MapResumeStorage extends AbstractStorage {
+class MapResumeStorage extends AbstractStorage {
     private Map<String, Resume> map = new HashMap<>();
 
     @Override
@@ -34,7 +34,7 @@ public class MapResumeStorage extends AbstractStorage {
 
     @Override
     protected void doDelete(Object resume) {
-        map.remove(((Resume)resume).getUuid());
+        map.remove(((Resume) resume).getUuid());
     }
 
     @Override

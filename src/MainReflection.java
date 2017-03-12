@@ -16,6 +16,6 @@ public class MainReflection {
         //Homework
         Class example = Class.forName("model.Resume");
         Method method = example.getMethod("toString");
-        String simple = (String)method.invoke(resume);
+        String simple = (String) method.invoke(resume);
     }
 }

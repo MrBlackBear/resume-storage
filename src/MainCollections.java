@@ -15,7 +15,7 @@ public class MainCollections {
     private static final Resume RESUME_3 = new Resume(UUID_3, "Name3");
 
     private static final String UUID_4 = "uuid4";
-    private static final Resume RESUME_4 = new Resume(UUID_4,"Name4" );
+    private static final Resume RESUME_4 = new Resume(UUID_4, "Name4");
 
     public static void main(String[] args) {
         Collection<Resume> collection = new ArrayList();
@@ -23,7 +23,7 @@ public class MainCollections {
         collection.add(RESUME_2);
         collection.add(RESUME_3);
 
-        for (Resume r : collection){
+        for (Resume r : collection) {
             System.out.println(r);
         }
     }
