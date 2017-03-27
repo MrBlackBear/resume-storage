@@ -1,9 +1,6 @@
 package model;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class Resume implements Comparable<Resume> {
     // Unique identifier
@@ -11,9 +8,13 @@ public class Resume implements Comparable<Resume> {
 
     private final String fullName;
 
-    private final Map<String, String> contacts = new HashMap<>();
+    public String getContact(ContactType type) {
+        return contacts.get(type);
+    }
 
-    private final Map<SectionType, Section> sectionMap = new HashMap<>();
+    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+
+    private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -34,28 +35,20 @@ public class Resume implements Comparable<Resume> {
         return fullName;
     }
 
-    public Map<String, String> getAllContacts() {
+    public Map<ContactType, String> getAllContacts() {
         return contacts;
     }
 
-    public void addContact(String type, String contact) {
+    public void addContact(ContactType type, String contact) {
         contacts.put(type, contact);
     }
 
-    public String getContact(String type) {
-        return contacts.get(type);
-    }
-
-    public Map<SectionType, Section> getAllSections() {
-        return sectionMap;
-    }
-
     public void addSection(SectionType type, Section section) {
-        sectionMap.put(type, section);
+        sections.put(type, section);
     }
 
     public void getSection(SectionType type) {
-        sectionMap.get(type);
+        sections.get(type);
     }
 
     @Override
@@ -67,7 +60,6 @@ public class Resume implements Comparable<Resume> {
 
         if (!uuid.equals(resume.uuid)) return false;
         return fullName.equals(resume.fullName);
-
     }
 
     @Override
